@@ -322,6 +322,42 @@ SELECT   p.pgf_barramento, p.pgf_utmx,p.pgf_utmy, p.servico,d.arg_id,d.arg_seque
 FROM   digital_arquivo d,elemento_rede_digital e,ponto_coletado_grafico pc,ponto_geografico p,inspecao i
 WHERE       d.arg_id = e.arg_id AND e.ponto_coletado_id = pc.ponto_coletado_id AND pc.mslink = p.mslink and p.servico=i.inspecao_nome and pgf_barramento in ('110137233');
 
+-----------------------------VERIFICAR QUANTIDADE DE FOTOS POR SERVIÇO, TRAZENDO APENAS A COLUNA DE SERVIÇOS DE QTD DE FOTOS---------------------------------------
+
+SELECT
+
+P.SERVICO
+--,P.PGF_BARRAMENTO
+--,pco.ponto_data
+--,pco.id_pda MSLINK_NO_DB
+--,pco.tb_elemento_id TIPO
+--,'\\10.7.1.45\OraFotoDir\CELPA\'|| p.servico foto
+,COUNT(d.arg_nome_arquivo) QTD_FOTO
+
+                                           from ponto_geografico P
+                                           INNER JOIN  ponto_coletado_grafico pc on pc.mslink=p.mslink
+                                           INNER JOIN ponto_coletado pco on pco.ponto_coletado_id=pc.ponto_coletado_id
+                                           LEFT JOIN elemento_rede_digital e on pc.ponto_coletado_id=e.ponto_coletado_id
+                                           LEFT JOIN digital_arquivo d on e.arg_id=d.arg_id
+
+ 
+
+
+    where  
+  --- p.pgf_barramento=('129321323')
+p.servico in ('25072023113903152970',
+'25072023113926152971',
+'25072023132913152982',
+'25072023143242152988',
+'25072023103039152945'
+) ---and pco.tb_elemento_id in('PG','PE')
+GROUP BY P.SERVICO
+--,P.PGF_BARRAMENTO
+
+--,pco.ponto_data
+--,pco.id_pda 
+--,pco.tb_elemento_id
+
 
 -------------------------LOCALIZAR POR TIPO DE POSTE
 
