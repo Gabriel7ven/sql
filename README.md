@@ -1,9 +1,5 @@
 # sql
 
- Vbs#572#45#Ujk
-
-Up9dn3kpv7
-
 \\10.30.58.44\inetpub\wwwroot\sicadhm\v1\Download\ceee\report\
 
 select * from view_avaliar_poste
